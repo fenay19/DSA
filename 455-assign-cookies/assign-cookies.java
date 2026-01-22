@@ -11,9 +11,9 @@ class Solution {
             j++;
             cnt++;
         }
-        else{
+      else{
             j++;
-        }
+      }
      }
      return cnt;
     }
