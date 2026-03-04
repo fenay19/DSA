@@ -15,10 +15,10 @@
  */
 class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
-        List<String>arr=new ArrayList<>();
-        dfs(root,"",arr);
+        List<String>res=new ArrayList<>();
+        dfs(root,"",res);
 
-        return arr;
+        return res;
 
 
     }
