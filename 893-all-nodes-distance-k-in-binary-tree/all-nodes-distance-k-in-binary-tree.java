@@ -57,7 +57,8 @@ class Solution {
             int size = queue.size();
 
            
-            if (currentLevel++ == k) break;
+            if (currentLevel== k) break;
+            currentLevel++;
 
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
