@@ -16,7 +16,7 @@
 class Solution {
     public boolean isSymmetric(TreeNode root) {
 
-     if(root==null) return true;
+     
 
     return symm(root.left,root.right);
      
@@ -24,13 +24,20 @@ class Solution {
     }
 
     public boolean symm(TreeNode root1,TreeNode root2){
-        if(root1==null || root2==null) return root1 == root2;
+if(root1==null && root2==null){
+    return true;
+}
+if(root1==null || root2==null){
+    return false;
+}
+if(root1.val!=root2.val){
+    return false;
+}
 
-    return (root1.val==root2.val)
-    &&symm(root1.left,root2.right)
-    &&symm(root1.right,root2.left);
+boolean r1=symm(root1.left,root2.right);
+boolean r2=symm(root1.right,root2.left);
 
-
+return r1 && r2;
         
     }
 }
