@@ -8,21 +8,32 @@
  * }
  */
 class Solution {
+
+    TreeNode ans = null;
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root==null || root==p || root==q) return root;
+        dfs(root, p, q);
+        return ans;
+    }
 
-       TreeNode l=lowestCommonAncestor(root.left,p,q);
-       TreeNode r=lowestCommonAncestor(root.right,p,q);
+    public int dfs(TreeNode root, TreeNode p, TreeNode q) {
 
-       if(l==null){
-        return r;
-       }
-       else if(r==null){
-        return l;
-       }
-       else{
-        return root;
-       }
+        if (root == null) return 0;
 
+        int l = dfs(root.left, p, q);
+        int r = dfs(root.right, p, q);
+
+        int self = 0;
+        if (root == p || root == q) {
+            self = 1;
+        }
+
+        int total = l + r + self;
+
+        if (total >= 2 && ans == null) {
+            ans = root;
+        }
+
+        return total;
     }
 }
