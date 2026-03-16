@@ -11,31 +11,38 @@
 class Solution {
     TreeNode ans=null;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        lca(root,p,q);
-        return ans;
+if(p.val<q.val){
+    lca(root,p,q);
+}
+else{
+    lca(root,q,p);
+}
+return ans;
         
     }
 
-    public int lca(TreeNode n,TreeNode p,TreeNode q){
-           if(n== null){
-            return 0;
-           }
+    public void lca(TreeNode root,TreeNode p,TreeNode q){
 
-           int l=lca(n.left,p,q);
-           int r=lca(n.right,p,q);
-int self=0;
+if(root==null) return;
 
-if(n==p||n==q){
-    self=1;
+if(root==p || root==q){
+    ans=root;
+    return;
 }
 
-int total=l+self+r;
-
-if(total==2 && ans==null){
-    ans=n;
+if(root.val <p.val){
+    lca(root.right,p,q);
+}
+else if(root.val>q.val){
+lca(root.left,p,q);
 }
 
-return total;
+else{
+    ans=root;
+}
+
+return;
+
 
 
 
