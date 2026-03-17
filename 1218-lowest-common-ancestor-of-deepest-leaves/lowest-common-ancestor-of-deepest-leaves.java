@@ -15,40 +15,26 @@
  */
 class Solution {
     public TreeNode lcaDeepestLeaves(TreeNode root) {
-        return dfs(root).n;
+     if(root==null) return root;
 
+     int lh=height(root.left);
+     int rh=height(root.right);
+
+     if(lh==rh){
+        return root;
+     }
+     else if(lh>rh){
+        return lcaDeepestLeaves(root.left);
+     }
+     else{
+        return lcaDeepestLeaves(root.right);
+     }
     }
 
-    class pair{
-        TreeNode n;
-        int depth;
-        pair(TreeNode n,int depth){
-            this.n=n;
-            this.depth=depth;
-        }
 
+public int height(TreeNode root){
+    if(root==null) return 0;
 
-    }
-
-    public pair dfs(TreeNode rt){
-
-
-        if(rt==null) return new pair(rt,0);
-
-        pair l=dfs(rt.left);
-        pair r=dfs(rt.right);
-
-        if(l.depth>r.depth){
-
-            return new pair(l.n,l.depth+1);
-        }
-        if(l.depth<r.depth){
-            return new pair(r.n,r.depth+1);
-        }
-
-
-        return new pair(rt,l.depth+1);
-
-    }
-
+    return 1+Math.max(height(root.left),height(root.right));
+}
 }
