@@ -1,18 +1,16 @@
 class Solution {
-    HashMap<Integer,Integer>dp=new HashMap<>();
     public int fib(int n) {
+        // tabulation approach
+        if(n==0 ||n==1) return n;
+        int p_prev=0;
+        int prev=1;
+        int ans=0;
+        for(int i=2;i<=n;i++){
+        ans=prev+p_prev;
+        p_prev=prev;
+        prev=ans;
 
-       if (n <= 1) {
-            return n;
         }
-        if(dp.containsKey(n)){
-            return dp.get(n);
-        }
-int a=fib(n-1);
-int b=fib(n-2);
-int ans=a+b;
-dp.put(n,ans);
-
-       return ans; 
+        return ans;
     }
 }
