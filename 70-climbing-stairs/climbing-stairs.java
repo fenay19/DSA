@@ -1,23 +1,22 @@
 class Solution {
-    HashMap<Integer,Integer>dp=new HashMap<>();
-    int ans=0;
     public int climbStairs(int n) {
-         return sum(0,n);
+        HashMap<Integer,Integer> map=new HashMap<>();
+        return stairs(n,0,map);
     }
-
-    public int sum(int i,int n){
-
-
-        if(i==n) return 1;
-        if(i>n) return 0;
-if(dp.containsKey(i)){
-    return dp.get(i);
-}
-        int a=sum(i+1,n);
-        int b=sum(i+2,n);
-
-         ans=a+b;
-        dp.put(i,ans);
+    int stairs(int n,int i,HashMap<Integer,Integer> map){
+        if(i==n){
+            return 1;
+        }
+        if(i>n){
+            return 0;
+        }
+        if(map.containsKey(i)){
+            return map.get(i);
+        }
+        int a=stairs(n,i+1,map);
+        int b=stairs(n,i+2,map);
+        int ans=a+b;
+        map.put(i,ans);
         return ans;
     }
 }
