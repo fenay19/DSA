@@ -1,41 +1,30 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        int n=piles.length;
-      Arrays.sort(piles);
-        int l=1;
-        int hi=piles[piles.length-1];
-        int res=0;
-         
-        while(l<=hi){
-int guessk=(l+hi)/2;
 
-if(hrsgiver(piles,n,guessk)>h){
-l=guessk+1;
+        int l = 1;
+        int r = 0;
 
+        for (int x : piles) {
+            r = Math.max(r, x);
         }
-        else{
 
-res=guessk;
-hi=guessk-1;
+        while (l <= r) {
 
+            int m = l + (r - l) / 2;
+
+            long hrs = 0;
+
+            for (int k : piles) {
+                hrs += (k + (long)m - 1) / m;
+            }
+
+            if (hrs <= h) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
         }
-        
-    }
-    return res;
-    }
-    long hrsgiver(int [] arr,int n,int k){
 
-long h=0;
-for(int i=0;i<n;i++){
-
-h=h+arr[i]/k;
-if(arr[i]%k!=0){
-    h++;
-}
-
-}
-return h;
-
-
+        return l;
     }
 }
