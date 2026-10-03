@@ -5,11 +5,14 @@ class Solution {
  int sum=0;
         for(int i=0;i<arr.length;i++){
 sum+=arr[i];
-int avg=sum/k;
-int len=i-j+1;
-if(len==k && avg>=threshold){
-    cnt++;
 
+int len=i-j+1;
+if(len==k ){
+  
+int avg=sum/k;
+if(avg>=threshold){
+    cnt++;
+}
 }
 while(len>=k){
     sum-=arr[j];
