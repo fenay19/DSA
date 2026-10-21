@@ -1,8 +1,12 @@
 # Write your MySQL query statement below
-select Department,Employee,Salary
-from (select d.name as Department,e.name as Employee,e.salary as Salary,
-Dense_rank() Over( partition by e.departmentId 
-order by e.salary desc) as rnk
+with maxsal as(
+select e.name as emp_name,e.salary,d.name as departement
+,dense_rank() over(partition by d.id order by e.salary desc) as rnk
 from employee e join department d
-on e.departmentId=d.id) x
+on e.departmentId=d.id
+
+
+)
+select departement as Department,emp_name as  Employee ,salary as Salary
+from maxsal 
 where rnk<=3;
