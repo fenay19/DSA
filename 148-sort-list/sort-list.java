@@ -10,57 +10,49 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
-        if(head==null || head.next==null) return head;
+       if(head==null || head.next==null) {
+        return head;
+       }
 
-        ListNode mid=findmid(head);
+       ListNode slow=head;
+       ListNode fast=head;
+       ListNode prev=null;
+       while(fast!=null && fast.next!=null){
+        prev=slow;
+        slow=slow.next;
+        fast=fast.next.next;
+       }
 
-        ListNode l=head;
-        ListNode r=mid.next;
-        mid.next=null;
-        ListNode lr=sortList(l);
-        ListNode rr=sortList(r);
+       prev.next=null;
+       ListNode l=sortList(head);
+       ListNode r=sortList(slow);
 
-        return merge(lr,rr);
-    }
-
-    public ListNode findmid(ListNode head){
- ListNode s=head;
- ListNode f=head.next;
- while(f!=null && f.next!=null){
-s=s.next;
-f=f.next.next;
-
-
- }
- return s;
-
+       return merge(l,r);
     }
     public ListNode merge(ListNode l,ListNode r){
-
-ListNode dum=new ListNode(-1);
-ListNode tmp=dum;
-
+ListNode dummy=new ListNode(0);
+ListNode curr=dummy;
 while(l!=null && r!=null){
-if(l.val<=r.val){
-tmp.next=l;
+    if(l.val<=r.val){
+curr.next=l;
 l=l.next;
 
-}
-else{
-    tmp.next=r;
-    r=r.next;
-}
-tmp=tmp.next;
 
 
-}
- if (l != null) {
-        tmp.next = l;
     }
-
-    if (r != null) {
-        tmp.next = r;
+    else{
+        curr.next=r;
+        r=r.next;
     }
-return dum.next;
+    curr=curr.next;
+
+}
+
+if(l!=null) curr.next=l;
+if(r!=null) curr.next=r;
+
+return dummy.next;
+
+
     }
 }
